@@ -87,7 +87,7 @@ def home():
 @app.route("/destinations", methods=["GET"])
 def get_destinations():
     destinations = Destination.query.all()
-    return jsonify([destination.to_dict()] for destination in destinations) 
+    return jsonify([destination.to_dict() for destination in destinations]) 
 
 #FOR THE ROUTES BELOW, THIS IS THE URL: https://www.websitedomain.com/desintations/<int:destination_id> -> this would be a single destination
 
@@ -101,7 +101,7 @@ def get_destination(destination_id):
         return jsonify({"error" : " Destination not found "}), 404
 
 # POST => create a new destination and add to endpoint 
-@app.route("/destinations/<int:destination_id>", methods=["POST"])
+@app.route("/destinations", methods=["POST"])
 def add_destinations():
     data = request.get_json()
 
@@ -142,4 +142,4 @@ def delete_destination(destination_id):
         return jsonify({"error":"Destination not found"}), 400
 
 if __name__ == "__main__":
-    app.run(debug = True, port=5001) # runs flask dev if current module is main.py, debug=True will constantly update for changes, automatically runs on port 5000  
+    app.run(debug = True, port=5002) # runs flask dev if current module is main.py, debug=True will constantly update for changes, automatically runs on port 5000  
